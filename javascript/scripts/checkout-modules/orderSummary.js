@@ -6,18 +6,18 @@ import { deliveryOptions } from '../../data/deliveryOptions.js';
 
 // Variables
 
-const orderSummary = document.querySelector('.js-payment-summary');
-
-const itemQuantity = orderSummary.querySelector('.js-items-quantity');
-const totalItems = orderSummary.querySelector('.js-total-items');
-const totalShipping = orderSummary.querySelector('.js-total-shipping');
-const totalItemPlusShip = orderSummary.querySelector('.js-total-item-plus-ship');
-const totalTax = orderSummary.querySelector('.js-total-tax');
-const totalOrder = orderSummary.querySelector('.js-total-order');
-
 // Functions
 
 function calcOrderSummary() {
+
+  const orderSummary = document.querySelector('.js-payment-summary');
+
+  const itemQuantity = orderSummary.querySelector('.js-items-quantity');
+  const totalItems = orderSummary.querySelector('.js-total-items');
+  const totalShipping = orderSummary.querySelector('.js-total-shipping');
+  const totalItemPlusShip = orderSummary.querySelector('.js-total-item-plus-ship');
+  const totalTax = orderSummary.querySelector('.js-total-tax');
+  const totalOrder = orderSummary.querySelector('.js-total-order');
 
   itemQuantity.innerHTML = calcItemQuantity();
   totalItems.innerHTML = formatCents(calcItemTotal());
@@ -95,4 +95,4 @@ function calcTax() {
 
 // ================================ //
 
-export { calcOrderSummary };
+export { calcOrderSummary, calcItemQuantity };
