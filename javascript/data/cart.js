@@ -1,0 +1,51 @@
+//  Variables
+let cart;
+
+// Functions
+
+loadFromStorage();
+
+// ====================== //
+
+function loadFromStorage() {
+  cart = JSON.parse(localStorage.getItem('cart')) || [];
+}
+
+// ====================== //
+
+function addToCart(id, quantity) {
+
+  const sameItem = cart.find(cartItem => cartItem.id === id);
+
+  if(sameItem) {
+    sameItem.quantity += quantity;
+  } else {
+    cart.push({
+      id,
+      quantity,
+      deliveryOptionId: '1'
+    })
+  }
+  saveCartLocal();
+}
+
+// ====================== //
+
+function saveCartLocal() {
+  localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+// ====================== //
+
+function updateCartQuantity() {
+
+  let cartQuantity = 0;
+
+  cart.forEach(cartItem => cartQuantity += cartItem.quantity);
+
+  return cartQuantity;
+}
+
+//  Exports
+
+export { addToCart, loadFromStorage, cart, saveCartLocal, updateCartQuantity };
