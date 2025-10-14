@@ -4,8 +4,6 @@ import { products } from '../../data/products.js';
 import { formatCents } from '../utils/money.js';
 import { deliveryOptions } from '../../data/deliveryOptions.js';
 
-// Variables
-
 // Functions
 
 function calcOrderSummary() {
@@ -95,4 +93,4 @@ function calcTax() {
 
 // ================================ //
 
-export { calcOrderSummary, calcItemQuantity };
+export { calcOrderSummary, calcItemQuantity, calcItemTotal, calcShipping };
