@@ -1,4 +1,4 @@
-import { calcOrderSummary, calcItemQuantity, calcItemTotal, calcShipping } from '../../scripts/checkout-modules/orderSummary.js';
+import { calcOrderSummary, calcTax, calcItemPlusShip, calcItemQuantity, calcItemTotal, calcShipping } from '../../scripts/checkout-modules/orderSummary.js';
 import { cart } from '../../data/cart.js';
 
 describe('Test Suite: CalcItemQuantity', () => {
@@ -51,7 +51,7 @@ describe('Test Suite: calcItemTotal', () => {
     }, {
         id: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
         quantity: 1,
-        deliveryOptionId: '1'
+        deliveryOptionId: '2'
     })
 
     expect(calcItemTotal()).toEqual(3185);
@@ -82,3 +82,53 @@ describe('Test Suite: calcShipping', () => {
   })
 
 })
+
+describe('Test Suite: CalcItemPlusShip', () => {
+
+  beforeEach(() => {
+    cart.splice(0, cart.length);
+  }) 
+
+  it('Calculates the total amount items + shipping', () => {
+
+    cart.push({
+      id: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
+      quantity: 1,
+      deliveryOptionId: '1'
+    }, {
+        id: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
+        quantity: 1,
+        deliveryOptionId: '2'
+    })
+
+  expect(calcItemPlusShip()).toEqual(3684);
+
+  }) 
+
+})
+
+describe('Test Suite: CalcTax', () => {
+
+  beforeEach(() => {
+    cart.splice(0, cart.length);
+  })
+
+  it('Calculate de tax based in the calcItemPlusShip function', () => {
+
+    cart.push({
+      id: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
+      quantity: 1,
+      deliveryOptionId: '1'
+    }, {
+        id: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
+        quantity: 1,
+        deliveryOptionId: '2'
+    })
+
+    expect(calcTax().toFixed(2)).toBeCloseTo(368.40, 2);
+
+  })
+
+})
+
+

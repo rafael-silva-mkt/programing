@@ -93,4 +93,4 @@ function calcTax() {
 
 // ================================ //
 
-export { calcOrderSummary, calcItemQuantity, calcItemTotal, calcShipping };
+export { calcOrderSummary, calcTax, calcItemPlusShip, calcItemQuantity, calcItemTotal, calcShipping };
