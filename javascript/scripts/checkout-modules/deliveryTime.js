@@ -74,7 +74,7 @@ function handleDeliveryDay(option) {
   while(weekDay === 'Saturday' || weekDay === 'Sunday') {
 
     days++;
-    deliveryTime = today.add(option.days, 'days')
+    deliveryTime = today.add(days, 'days')
     weekDay = deliveryTime.format('dddd');
 
   }
@@ -84,4 +84,4 @@ function handleDeliveryDay(option) {
 
 // ================================ //
 
-export { generateDeliveryOptions, handleRadioButton };
+export { generateDeliveryOptions };

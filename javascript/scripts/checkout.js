@@ -2,7 +2,7 @@
 import { cart, saveCartLocal, updateCartQuantity } from '../data/cart.js';
 import { products } from '../data/products.js';
 import { formatCents } from './utils/money.js';
-import { generateDeliveryOptions, handleRadioButton } from '../scripts/checkout-modules/deliveryTime.js';
+import { generateDeliveryOptions } from '../scripts/checkout-modules/deliveryTime.js';
 import dayjs from 'https://cdn.jsdelivr.net/npm/dayjs@1.11.18/+esm';
 import { deliveryOptions } from '../data/deliveryOptions.js';
 import { calcOrderSummary } from '../scripts/checkout-modules/orderSummary.js';
