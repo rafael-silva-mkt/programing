@@ -1,15 +1,8 @@
 //  Variables
-let cart;
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
 
 // Functions
-
-loadFromStorage();
-
-// ====================== //
-
-function loadFromStorage() {
-  cart = JSON.parse(localStorage.getItem('cart')) || [];
-}
 
 // ====================== //
 
@@ -48,4 +41,4 @@ function updateCartQuantity() {
 
 //  Exports
 
-export { addToCart, loadFromStorage, cart, saveCartLocal, updateCartQuantity };
+export { addToCart, cart, saveCartLocal, updateCartQuantity };
