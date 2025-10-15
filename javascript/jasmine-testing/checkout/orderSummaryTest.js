@@ -130,5 +130,3 @@ describe('Test Suite: CalcTax', () => {
   })
 
 })
-
-
