@@ -1,5 +1,5 @@
-import { calcOrderSummary, calcItemQuantity, calcItemTotal, calcShipping, calcTax,  } from '../../scripts/checkout-modules/orderSummary.js';
-import { cart } from '../../data/cart.js';
+import { calcOrderSummary, calcItemQuantity, calcItemTotal, calcShipping, calcTax,  } from '../../../scripts/checkout-modules/orderSummary.js';
+import { cart } from '../../../data/cart.js';
 
 describe('Test: calcOrderSummary', () => {
 

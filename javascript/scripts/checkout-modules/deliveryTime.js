@@ -84,4 +84,4 @@ function handleDeliveryDay(option) {
 
 // ================================ //
 
-export { generateDeliveryOptions };
+export { generateDeliveryOptions, today, handleRadioButton, handleDeliveryDay };

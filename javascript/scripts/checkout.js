@@ -6,6 +6,7 @@ import { generateDeliveryOptions } from '../scripts/checkout-modules/deliveryTim
 import dayjs from 'https://cdn.jsdelivr.net/npm/dayjs@1.11.18/+esm';
 import { deliveryOptions } from '../data/deliveryOptions.js';
 import { calcOrderSummary } from '../scripts/checkout-modules/orderSummary.js';
+import '../data/cart-oop.js';
 
 //  Variables
 
@@ -120,20 +121,20 @@ function handleButtonEvent(button, id, container) {
 
     const inputElement = container.querySelector('.js-input-element');
     const newQuantity = Number(inputElement.value);
-    
+ 
     if(newQuantity <= 0){
       return;
     }
 
     item.quantity = newQuantity
-     
+ 
     container.querySelector('.js-quantity-label').innerHTML = item.quantity;
 
     updateButton.classList.remove('hidden');
     inputContainer.classList.remove('show');
 
   } else if(button === 'delete') {
-    
+ 
     cart.splice(cart.indexOf(item), 1);
     container.remove();
 
