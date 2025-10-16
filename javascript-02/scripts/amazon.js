@@ -1,10 +1,13 @@
 // Imports
-import { products, Product } from '../data/products.js';
+import { products } from '../data/products.js';
 import { cart } from '../data/cart.js';
 
 // Variables
 let pageHtml = '';
 const htmlContainer = document.querySelector('.js-html-container');
+const cartQuantity = document.querySelector('.js-cart-quantity');
+
+cartQuantity.innerHTML = cart.updateCartQuantity();
 
 products.forEach(product => {
 
@@ -82,6 +85,8 @@ document.querySelectorAll('.js-product-container').forEach(container => {
     const quantity = Number(selectElement.value);
 
     cart.addToCart(id, quantity);
+    cart.popUpMessage(container, id);
+    cartQuantity.innerHTML = cart.updateCartQuantity();
 
   })
 

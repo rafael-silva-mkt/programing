@@ -1,6 +1,6 @@
 import { formatCurrency } from '../scripts/utils/money.js';
 
-export class Product {
+class Product {
 
   constructor(productDetails){
 

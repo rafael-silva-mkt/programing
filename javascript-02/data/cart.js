@@ -1,11 +1,10 @@
 class Cart {
 
-  localStorageKey;
-  cartItems = JSON.parse(localStorage.getItem(this.localStorageKey)) || [];
-
-  constructor(localStorageKey) {
-   this.localStorageKey = localStorageKey;
-  }
+  constructor(key) {
+    this.storageKey = key;
+    this.cartItems = JSON.parse(localStorage.getItem(this.storageKey)) || [];
+    this.timechecker = new Map();
+  };
 
   addToCart(id, quantity) {
 
@@ -22,13 +21,43 @@ class Cart {
     }
 
     this.saveCartLocal();
-
-    console.log(this.cartItems);
   };
 
   saveCartLocal() {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+    localStorage.setItem(this.storageKey, JSON.stringify(this.cartItems));
   };
+
+  updateCartQuantity() {
+
+    let cartQuantity = 0;
+
+    this.cartItems.forEach(cartItem => cartQuantity += cartItem.quantity);
+
+    return cartQuantity;
+
+  };
+
+  popUpMessage(container, id) {
+
+    const messageContainer = container.querySelector('.js-container-message');
+
+    const timer = this.timechecker.get(id);
+
+    if(timer) {
+      clearTimeout(timer);
+    } else {
+      messageContainer.classList.add('show');
+    }
+
+    const newTimer = setTimeout(() => {
+      messageContainer.classList.remove('show');
+      this.timechecker.delete(id);
+    }, 2000)
+
+    this.timechecker.set(id, newTimer);
+
+  };
+
 }
 
 export const cart = new Cart('regular-cart');
