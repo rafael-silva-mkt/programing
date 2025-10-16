@@ -1,26 +1,18 @@
-//  Imports 
-import { products } from '../data/products.js';
-import { addToCart, updateCartQuantity } from '../data/cart.js';
+// Imports
+import { products, Product } from '../data/products.js';
+import { cart } from '../data/cart.js';
 
-//  Variables
+// Variables
 let pageHtml = '';
 const htmlContainer = document.querySelector('.js-html-container');
-const cartQuantity = document.querySelector('.js-cart-quantity');
-
-//  Generating HTML
-
-cartQuantity.innerHTML = updateCartQuantity();
 
 products.forEach(product => {
 
-  const id = product.id;
-  const name = product.name;
+  const id = product.id 
   const image = product.image;
-  const price = `$${(product.priceCents / 100)}`
-  const stars = product.rating.stars * 10;
-  const count = product.rating.count;
+  const name = product.name;
 
-  pageHtml += `
+pageHtml += `
         <div class="product-container js-product-container" data-id="${id}">
           <div class="product-image-container">
             <img class="product-image"
@@ -33,14 +25,14 @@ products.forEach(product => {
 
           <div class="product-rating-container">
             <img class="product-rating-stars"
-              src="images/ratings/rating-${stars}.png">
+              src="${product.getStarsUrl()}">
             <div class="product-rating-count link-primary">
               87
             </div>
           </div>
 
           <div class="product-price">
-            ${price}
+            $${product.getPrice()}
           </div>
 
           <div class="product-quantity-container">
@@ -74,8 +66,6 @@ products.forEach(product => {
 htmlContainer.innerHTML = pageHtml;
 })
 
-//  Functions and Event Listeners
-
 document.querySelectorAll('.js-product-container').forEach(container => {
 
   container.addEventListener('click', (event) => {
@@ -84,38 +74,15 @@ document.querySelectorAll('.js-product-container').forEach(container => {
     const click = event.target;
     const button = click.dataset.type;
 
-    if(!button){
+    if(!button) {
       return;
     }
 
     const selectElement = container.querySelector('.js-select-quantity');
     const quantity = Number(selectElement.value);
 
-    addToCart(id, quantity);
-    cartQuantity.innerHTML = updateCartQuantity();
-    popUpMessage(container, id);
+    cart.addToCart(id, quantity);
+
   })
 
 })
-
-const timercheck = new Map();
-
-function popUpMessage(container, id) {
-
-  const messageContainer = container.querySelector('.js-container-message');
-
-  const timer = timercheck.get(id);
-
-  if(timer) {
-    clearTimeout(timer);
-  } else {
-    messageContainer.classList.add('show');
-  }
-
-  const newTimer = setTimeout(() => {
-    messageContainer.classList.remove('show');
-    timercheck.delete(id);
-  }, 2000)
-
-  timercheck.set(id, newTimer);
-}

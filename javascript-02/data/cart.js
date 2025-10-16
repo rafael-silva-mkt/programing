@@ -1,43 +1,34 @@
-//  Variables
-const cart = JSON.parse(localStorage.getItem('cart')) || [];
+class Cart {
 
-// Functions
+  localStorageKey;
+  cartItems = JSON.parse(localStorage.getItem(this.localStorageKey)) || [];
 
-// ====================== //
-
-function addToCart(id, quantity) {
-
-  const sameItem = cart.find(cartItem => cartItem.id === id);
-
-  if(sameItem) {
-    sameItem.quantity += quantity;
-  } else {
-    cart.push({
-      id,
-      quantity
-    })
+  constructor(localStorageKey) {
+   this.localStorageKey = localStorageKey;
   }
 
-  saveCartLocal();
+  addToCart(id, quantity) {
+
+    const sameItem = this.cartItems.find(cartItem => cartItem.id === id);
+
+    if(sameItem) {
+      sameItem.quantity += quantity;
+    } else {
+      this.cartItems.push({
+        id,
+        quantity,
+        deliveryOptionId: '1'
+      })
+    }
+
+    this.saveCartLocal();
+
+    console.log(this.cartItems);
+  };
+
+  saveCartLocal() {
+    localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+  };
 }
 
-// ====================== //
-
-function saveCartLocal() {
-  localStorage.setItem('cart', JSON.stringify(cart));
-}
-
-// ====================== //
-
-function updateCartQuantity() {
-
-  let cartQuantity = 0;
-
-  cart.forEach(cartItem => cartQuantity += cartItem.quantity);
-
-  return cartQuantity;
-}
-
-//  Exports
-
-export { addToCart, cart, saveCartLocal, updateCartQuantity };
+export const cart = new Cart('regular-cart');

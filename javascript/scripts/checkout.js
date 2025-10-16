@@ -6,7 +6,7 @@ import { generateDeliveryOptions } from '../scripts/checkout-modules/deliveryTim
 import dayjs from 'https://cdn.jsdelivr.net/npm/dayjs@1.11.18/+esm';
 import { deliveryOptions } from '../data/deliveryOptions.js';
 import { calcOrderSummary } from '../scripts/checkout-modules/orderSummary.js';
-import '../data/cart-class.js';
+// import '../data/cart-class.js';
 
 //  Variables
 
