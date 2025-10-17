@@ -1,14 +1,22 @@
+// Imports
+
+// Exports
+export { cart };
+
+// Variables and class
 class Cart {
 
   constructor(key) {
     this.storageKey = key;
     this.cartItems = JSON.parse(localStorage.getItem(this.storageKey)) || [];
-    this.timechecker = new Map();
-  };
+  }
 
-  addToCart(id, quantity) {
+  addToCart(container, id) {
 
     const sameItem = this.cartItems.find(cartItem => cartItem.id === id);
+
+    const selectElement = container.querySelector('.js-select-quantity');
+    const quantity = Number(selectElement.value);
 
     if(sameItem) {
       sameItem.quantity += quantity;
@@ -21,11 +29,12 @@ class Cart {
     }
 
     this.saveCartLocal();
-  };
+    console.log(this.cartItems);
+  }
 
   saveCartLocal() {
     localStorage.setItem(this.storageKey, JSON.stringify(this.cartItems));
-  };
+  }
 
   updateCartQuantity() {
 
@@ -35,29 +44,9 @@ class Cart {
 
     return cartQuantity;
 
-  };
-
-  popUpMessage(container, id) {
-
-    const messageContainer = container.querySelector('.js-container-message');
-
-    const timer = this.timechecker.get(id);
-
-    if(timer) {
-      clearTimeout(timer);
-    } else {
-      messageContainer.classList.add('show');
-    }
-
-    const newTimer = setTimeout(() => {
-      messageContainer.classList.remove('show');
-      this.timechecker.delete(id);
-    }, 2000)
-
-    this.timechecker.set(id, newTimer);
-
-  };
+  }
 
 }
 
-export const cart = new Cart('regular-cart');
+const cart = new Cart('regular-cart');
+

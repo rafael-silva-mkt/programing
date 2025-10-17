@@ -1,14 +1,16 @@
+// Imports
 import { formatCurrency } from '../scripts/utils/money.js';
 
+// Variables and Classes
 class Product {
 
-  constructor(productDetails){
+  constructor(productDetail) {
 
-    this.id = productDetails.id;
-    this.image = productDetails.image;
-    this.name = productDetails.name;
-    this.rating = productDetails.rating;
-    this.priceCents = productDetails.priceCents;
+    this.id = productDetail.id;
+    this.image = productDetail.image;
+    this.name = productDetail.name;
+    this.rating = productDetail.rating;
+    this.priceCents = productDetail.priceCents;
 
   }
 
@@ -17,12 +19,13 @@ class Product {
   }
 
   getPrice() {
-    return `${formatCurrency(this.priceCents)}`;
+    return `${formatCurrency(this.priceCents)}`
   }
 
 }
 
-export const products = [
+
+const productsData = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
     image: "images/products/athletic-cotton-socks-6-pairs.jpg",
@@ -681,6 +684,8 @@ export const products = [
       "mens"
     ]
   }
-].map((productDetails) => {
-  return new Product(productDetails);
-});
+];
+
+const products = productsData.map(productDetail => new Product(productDetail));
+
+export { products };
