@@ -24,6 +24,7 @@ function handleCartButton() {
 
       cart.addToCart(container, id);
       cartQuantity.innerHTML = cart.updateCartQuantity();
+      cart.popUpMessage(container, id);
 
     })
 

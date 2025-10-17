@@ -1,5 +1,3 @@
-// Imports
-
 // Exports
 export { cart };
 
@@ -9,7 +7,8 @@ class Cart {
   constructor(key) {
     this.storageKey = key;
     this.cartItems = JSON.parse(localStorage.getItem(this.storageKey)) || [];
-  }
+    this.timechecker = new Map();
+  };
 
   addToCart(container, id) {
 
@@ -29,12 +28,11 @@ class Cart {
     }
 
     this.saveCartLocal();
-    console.log(this.cartItems);
-  }
+  };
 
   saveCartLocal() {
     localStorage.setItem(this.storageKey, JSON.stringify(this.cartItems));
-  }
+  };
 
   updateCartQuantity() {
 
@@ -44,9 +42,29 @@ class Cart {
 
     return cartQuantity;
 
+  };
+
+  popUpMessage(container, id) {
+
+    const messageContainer = container.querySelector('.js-container-message');
+
+    const timer = this.timechecker.get(id);
+
+    if(timer) {
+      clearTimeout(timer);
+    } else {
+      messageContainer.classList.add('show');
+    }
+
+    const newTimer = setTimeout(() => {
+      messageContainer.classList.remove('show');
+      this.timechecker.delete(id);
+    }, 2000);
+
+    this.timechecker.set(id, newTimer);
+
   }
 
 }
 
 const cart = new Cart('regular-cart');
-
